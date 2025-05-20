@@ -17,11 +17,13 @@ import SinglePageMen from "./components/SinglePageMen";
 import Footer from "./components/Footer";
 import SinglePageWomen from "./components/SinglePageWomen";
 import { ProductProvider } from "./context/ProductContext";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <AuthProvider>
       <ProductProvider>
+        <ScrollToTop/>
       <Navbar />
       {/* <Footer/> */}
       <Routes>

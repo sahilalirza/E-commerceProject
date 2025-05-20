@@ -10,29 +10,36 @@ import {
 import { useState, useEffect } from 'react';
 import { useProductContext } from '../context/ProductContext';
 import Footer from './Footer';
+import { fetchMenProducts } from '../productAPIs/menProductsAPI';
+import { fetchWomenProducts } from '../productAPIs/womenProductsAPI';
+import { fetchKidsProducts } from '../productAPIs/kidsProductsAPI';
 
 const ProductDetail = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // product-title-id
   const navigate = useNavigate();
-  const { products } = useProductContext();
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const { selectedProduct } = useProductContext();
+  const [product, setProduct] = useState(selectedProduct);
   const [selectedSize, setSelectedSize] = useState(null);
 
-  // Find the product by ID from the context
+  // Try to reconstruct the product from both men and women products
   useEffect(() => {
-    if (products && id) {
-      const product = products.find(
-        (p) => p.title.replace(/\s+/g, '-').toLowerCase() === id
-      );
-      setSelectedProduct(product);
-    }
-  }, [products, id]);
+    const loadFallbackProduct = async () => {
+      if (!product && id) {
+        const allProducts = [...await fetchMenProducts(), ...await fetchWomenProducts(), ...await fetchKidsProducts()];
+        const found = allProducts.find(
+          (p) => p.title.replace(/\s+/g, '-').toLowerCase() === id
+        );
+        setProduct(found);
+      }
+    };
+    loadFallbackProduct();
+  }, [id, product]);
 
   const handleSizeChange = (event, newSize) => {
     if (newSize !== null) setSelectedSize(newSize);
   };
 
-  if (!selectedProduct) {
+  if (!product) {
     return (
       <Box sx={{ textAlign: 'center', mt: 10 }}>
         <Typography variant="h4">Product not found</Typography>
@@ -64,8 +71,8 @@ const ProductDetail = () => {
           }}
         >
           <img
-            src={selectedProduct.image}
-            alt={selectedProduct.title}
+            src={product.image}
+            alt={product.title}
             style={{ width: '100%', maxWidth: 400, borderRadius: 12 }}
           />
         </Box>
@@ -73,13 +80,13 @@ const ProductDetail = () => {
         {/* Product Info */}
         <Box sx={{ width: { xs: '100%', md: '50%' } }}>
           <Typography variant="h4" fontWeight="bold" gutterBottom>
-            {selectedProduct.title}
+            {product.title}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-            {selectedProduct.description}
+            {product.description}
           </Typography>
           <Typography variant="h5" fontWeight="bold" color="primary" gutterBottom>
-            {selectedProduct.price}
+            {product.price}
           </Typography>
 
           {/* Size Selection */}
@@ -92,15 +99,9 @@ const ProductDetail = () => {
             onChange={handleSizeChange}
             aria-label="Size"
           >
-            <ToggleButton value="S" aria-label="Small">
-              S
-            </ToggleButton>
-            <ToggleButton value="M" aria-label="Medium">
-              M
-            </ToggleButton>
-            <ToggleButton value="L" aria-label="Large">
-              L
-            </ToggleButton>
+            <ToggleButton value="S" aria-label="Small">S</ToggleButton>
+            <ToggleButton value="M" aria-label="Medium">M</ToggleButton>
+            <ToggleButton value="L" aria-label="Large">L</ToggleButton>
           </ToggleButtonGroup>
 
           {/* Buttons */}
@@ -134,75 +135,4 @@ const ProductDetail = () => {
 
 export default ProductDetail;
 
-
-// import React, { useEffect, useState } from "react";
-// import { useParams, useNavigate } from "react-router-dom";
-// import { Typography, Button, Box } from "@mui/material";
-// import { fetchWomenProducts } from "../productAPIs/womenProductsAPI";
-// import { fetchMenProducts } from "../productAPIs/menProductsAPI";
-
-// const ProductDetail = () => {
-//   const { category, id } = useParams();
-//   const navigate = useNavigate();
-//   const [product, setProduct] = useState(null);
-
-//   useEffect(() => {
-//     const loadProduct = async () => {
-//       let products = [];
-
-//       if (category === "men") {
-//         products = await fetchMenProducts();
-//       } else if (category === "women") {
-//         products = await fetchWomenProducts();
-//       } else {
-//         setProduct(null);
-//         return;
-//       }
-
-//       // slugify: title to lowercase, replace spaces with hyphens
-//       const found = products.find(
-//         (p) => p.title.toLowerCase().replace(/\s+/g, "-") === id
-//       );
-
-//       setProduct(found || null);
-//     };
-
-//     loadProduct();
-//   }, [category, id]);
-
-//   if (!product) {
-//     return (
-//       <Box sx={{ textAlign: "center", mt: 10 }}>
-//         <Typography variant="h4">Product not found</Typography>
-//         <Button variant="contained" onClick={() => navigate(-1)}>
-//           Go Back
-//         </Button>
-//       </Box>
-//     );
-//   }
-
-//   return (
-//     <Box sx={{ padding: 4, maxWidth: 800, margin: "0 auto" }}>
-//       <img
-//         src={product.image}
-//         alt={product.title}
-//         style={{ width: "100%", borderRadius: 12, marginBottom: 20 }}
-//       />
-//       <Typography variant="h4" fontWeight="bold" gutterBottom>
-//         {product.title}
-//       </Typography>
-//       <Typography variant="body1" gutterBottom>
-//         {product.description}
-//       </Typography>
-//       <Typography variant="h5" fontWeight="bold" color="primary" gutterBottom>
-//         {product.price}
-//       </Typography>
-//       <Button variant="contained" color="primary">
-//         Add to Cart
-//       </Button>
-//     </Box>
-//   );
-// };
-
-// export default ProductDetail;
 

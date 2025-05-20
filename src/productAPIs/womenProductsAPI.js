@@ -1,54 +1,54 @@
 
 export const fetchWomenProducts = async () => {
-  // This would be a real API in production
   return [
-  {
-    title: 'Classic Denim',
-    description: 'Comfort and style in one pair.',
-    image: 'https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-    price: '$49.99',
-  },
-  {
-    title: "Campus Sutra Men's Paisley Flora Shirt",
-    description: 'Comfort and style in one pair.',
-    image: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSAAEroJ_aeItB8uTjgtjE-M0xMJ9E-V-VcWgvL_0_ZlmSP0wYNv6yjACxkrusdkfSao42Cxm4_VJK6yij-Rz8beyhc-408Ja5tg57BnGqM',
-    price: '$49.99',
-  },
-  {
-    title: 'Stylish Formal Shirts for Men',
-    description: 'Comfort and style in one pair.',
-    image: 'https://images.meesho.com/images/products/204307799/pd2lf_1200.jpg',
-    price: '$49.99',
-  },
-  {
-    title: "Leriya Fashion Men's Textured Regular Fit Casual Fancy Full Sleeve Shirt",
-    description: 'Comfort and style in one pair.',
-    image: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTpXkA9h7hi3qOzRx8nkwTWy4qEtR1T6Yt3EKocqjia5qEq7_aJGTYZhsxLd5m-f6WmI0kJrok8ps-SeOBrQT9MJJwLuyZH00ApZcLQ-cs42rmF4PSicJrK',
-    price: '$49.99',
-  },
-  {
-    title: "The Indian Garage Co Men's Regular Fit Checkered Full Sleeves Spread Collar Casual Shirt",
-    description: 'Comfort and style in one pair.',
-    image: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSH3ySof0D59hg-HSiuwEU6iUMSiXyju7yHUEVuv4BcJ5f9mEGMxFBHGfUADowmMQCQ80X1ffLnI-8QJOExn6fhwco63cCDVw1i3TUyWjXS',
-    price: '$49.99',
-  },
-  {
-    title: "Campus Sutra Men's Self Design Casual Shirt",
-    description: 'Comfort and style in one pair.',
-    image: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRpTQPvGAxCLneQgwmRCmnC2ATO54lUvLU3_YyNtev8_dwDt-SYuVj7NIpe7YnhB5Rs3qycGKrRocXXEmOcnQKtgZedsyieI7SyIvYViRzs',
-    price: '$49.99',
-  },
-  {
-    title: "Highlander Men's Slim Fit Printed Casual Shirt",
-    description: 'Comfort and style in one pair.',
-    image: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQr6LI0lDYrGVmxuHugnsOBgN3xtvzhHvKdUwUXxUFFOfEK9V9NB0jiZKOCiRMQaiaW8V6eJFyK_J6e1Ilw8Zfjg69I4z6ty-bgzthOxaW_',
-    price: '$49.99',
-  },
-  {
-    title: "The Bear House Men's Slim Fit Solid Casual Shirt",
-    description: 'Comfort and style in one pair.',
-    image: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQ7OlggFtkSytm7DR2bw5rI9_wN1uL16GejJKCCMlRhNDW-restGvxilljY7N0DRoykSUId6tXYgraDJLuylquq0Xu939DCurVebh4GHpY',
-    price: '$49.99',
-  },
+    {
+      title: 'Elegant Floral Dress',
+      description: 'Breezy and beautiful summer dress.',
+      image: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTJV8mo-lj2bscc3HSCaizhRuqUWLXTZEhv0EqGq88nXoTFHZji2Xq4PpFynRruGlBDqK-X0Jaw8NUfeAqWCJS2JrfvoQw951TTeHxVcjA',
+      price: '$59.99',
+    },
+   {
+      title: 'Classic White Kurti',
+      description: 'Perfect for casual or formal wear.',
+      image: 'https://images.meesho.com/images/products/321750698/xyw98_1200.jpg',
+      price: '$29.99',
+    },
+   {
+      title: 'Trendy Co-ord Set',
+      description: 'Stylish and comfy.',
+      image: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTUYGFgHtyJ1fwl9_7lEwWN_InQwx0G2JZtDoUwW_kU5nhk-RoggOVVJiv4pvgIDuDk5aUbFwJuEqjYlzuaEzsTo1Uw8ncNdt-2nHPsOKw',
+      price: '$49.99',
+    },
+{
+      title: 'Chic Denim Jacket',
+      description: 'Stay warm in style.',
+      image: 'https://www.alamodelabel.in/cdn/shop/files/0BABBB71-586F-4198-844A-43164F1A958E_600x.jpg?v=1735462058',
+      price: '$69.99',
+    },
+    {
+      title: 'Women Embroidered Gown Dress',
+      description: 'Elegant embroidered gown perfect for festive occasions.',
+      image: 'https://assets.ajio.com/medias/sys_master/root/20240115/afuc/65a4f2678cdf1e0df5b467c8/-473Wx593H-466977059-black-MODEL.jpg',
+      price: '$59.99',
+    },
+   {
+      title: "Maroon Striped Print Poly Blend Kurta Set",
+      description: "Graceful georgette dress with a trendy paisley design.",
+      image: 'https://img.faballey.com/images/Product/XKS17271Z/4.jpg',
+      price: '$29.99',
+    },
+   {
+      title: 'Multicolor Digital Print Rayon Straight Kurta',
+      description: 'Stylish and comfy.',
+      image: 'https://img.faballey.com/images/Product/XTN00302A/3.jpg',
+      price: '$49.99',
+    },
+{
+      title: 'Yellow Digital Print Rayon Kurta Set',
+      description: 'Chic yellow dress with paisley print,',
+      image: 'https://img.faballey.com/images/Product/XKS13864A/3.jpg',
+      price: '$69.99',
+    },
+
 ];
 };

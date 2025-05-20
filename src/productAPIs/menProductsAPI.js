@@ -1,5 +1,4 @@
 export const fetchMenProducts = async () => {
-  // This would be a real API in production
   return [
   {
     title: 'Classic Denim',

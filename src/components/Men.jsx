@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Typography, Button } from '@mui/material';
-import './Men.css';
-import QuickView from './QuickView';
 import { useNavigate } from 'react-router-dom';
-import { useProductContext } from '../context/ProductContext';
+import { useProductContext } from '../context/ProductContext';  // <-- Import here
+import QuickView from './QuickView';
+import './Men.css';
 
 const Men = () => {
   const [open, setOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  const { products, setSelectedProduct } = useProductContext();
+  const { menProducts, setSelectedProduct } = useProductContext();
   const navigate = useNavigate();
 
   const handleOpen = (item) => {
@@ -18,8 +18,12 @@ const Men = () => {
 
   const handleNavigate = (item) => {
     setSelectedProduct(item);
-    navigate(`/product/${item.id}`);
+    navigate(`/product/${item.title.replace(/\s+/g, '-').toLowerCase()}`);
   };
+
+  if (!menProducts.length) {
+    return <Typography>Loading products...</Typography>;
+  }
 
   return (
     <div style={{ margin: '0 auto' }}>
@@ -31,10 +35,15 @@ const Men = () => {
       </Typography>
 
       <div className="cards-wrapper">
-        {products.map((item, index) => (
+        {menProducts.map((item, index) => (
           <div key={index} className="card-container">
             <div className="card-image">
-              <img src={item.image} alt={item.title} onClick={() => handleNavigate(item)} style={{ cursor: 'pointer' }} />
+              <img
+                src={item.image}
+                alt={item.title}
+                onClick={() => handleNavigate(item)}
+                style={{ cursor: 'pointer' }}
+              />
               <button className="quick-button" onClick={() => handleOpen(item)}>
                 Quick View
               </button>
@@ -44,9 +53,7 @@ const Men = () => {
               <p className="desc">{item.description}</p>
               <div className="button">
                 <div className="price">{item.price}</div>
-                <Button sx={{ backgroundColor: 'black', color: 'white' }}>
-                  Add to Cart
-                </Button>
+                <Button sx={{ backgroundColor: 'black', color: 'white' }}>Add to Cart</Button>
               </div>
             </div>
           </div>

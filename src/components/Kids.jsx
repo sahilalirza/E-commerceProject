@@ -1,78 +1,67 @@
-import { Typography } from '@mui/material';
-import React from 'react'
-
-const cards = [
-  {
-    title: 'Classic Denim',
-    description: 'Comfort and style in one pair.',
-    image: 'https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-    price: '$49.99',
-  },
-   {
-    title: 'Classic Denim',
-    description: 'Comfort and style in one pair.',
-    image: 'https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-    price: '$49.99',
-  },
-   {
-    title: 'Classic Denim',
-    description: 'Comfort and style in one pair.',
-    image: 'https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-    price: '$49.99',
-  },
-   {
-    title: 'Classic Denim',
-    description: 'Comfort and style in one pair.',
-    image: 'https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-    price: '$49.99',
-  },
-   {
-    title: 'Classic Denim',
-    description: 'Comfort and style in one pair.',
-    image: 'https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-    price: '$49.99',
-  },
-   {
-    title: 'Classic Denim',
-    description: 'Comfort and style in one pair.',
-    image: 'https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-    price: '$49.99',
-  },
-   {
-    title: 'Classic Denim',
-    description: 'Comfort and style in one pair.',
-    image: 'https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-    price: '$49.99',
-  },
-   {
-    title: 'Classic Denim',
-    description: 'Comfort and style in one pair.',
-    image: 'https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0',
-    price: '$49.99',
-  },
-];
+import { useState } from 'react';
+import { Typography, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useProductContext } from '../context/ProductContext';
+import QuickView from './QuickView';
+import './Men.css';  // Create a CSS file similar to Men.css if needed
 
 const Kids = () => {
-  return (
-<>
-    <Typography variant='h2' mt={15} sx={{display:'flex',justifyContent:'center',alignItems:'center',fontWeight:"bold"}}>Kid's Fashion</Typography>
-    <Typography variant='h6' sx={{display:'flex',justifyContent:'center',alignItems:'center'}}>Kid's Fashion</Typography>
-    <div className="cards-wrapper">
-      {cards.map((item, index) => (
-        <div key={index} className="card-container">
-          <div className="card-image">
-            <img src={item.image} alt={item.title} />
-          </div>
-          <div className="card-content">
-            <h2>{item.title}</h2>
-            <p className="desc">{item.description}</p>
-            <div className="price">{item.price}</div>
-          </div>
-        </div>
-      ))}
-    </div>
+  const [open, setOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const { kidsProducts, setSelectedProduct } = useProductContext();
+  const navigate = useNavigate();
 
-    </>
+  const handleOpen = (item) => {
+    setSelectedCard(item);
+    setOpen(true);
+  };
+
+  const handleNavigate = (item) => {
+    setSelectedProduct(item);
+    navigate(`/product/${item.title.replace(/\s+/g, '-').toLowerCase()}`);
+  };
+
+  if (!kidsProducts.length) return <Typography>Loading kids products...</Typography>;
+
+  return (
+    <div style={{ margin: '0 auto' }}>
+      <Typography variant="h2" mt={15} sx={{ textAlign: 'center', fontWeight: 'bold' }}>
+        Kids Fashion
+      </Typography>
+      <Typography variant="h6" sx={{ textAlign: 'center' }}>
+        Discover the best styles for kids.
+      </Typography>
+
+      <div className="cards-wrapper">
+        {kidsProducts.map((item, index) => (
+          <div key={index} className="card-container">
+            <div className="card-image">
+              <img
+                src={item.image}
+                alt={item.title}
+                onClick={() => handleNavigate(item)}
+                style={{ cursor: 'pointer' }}
+              />
+              <button className="quick-button" onClick={() => handleOpen(item)}>
+                Quick View
+              </button>
+            </div>
+            <div className="card-content">
+              <h2>{item.title}</h2>
+              <p className="desc">{item.description}</p>
+              <div className="button">
+                <div className="price">{item.price}</div>
+                <Button sx={{ backgroundColor: 'black', color: 'white' }}>
+                  Add to Cart
+                </Button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <QuickView open={open} onClose={() => setOpen(false)} item={selectedCard} />
+    </div>
   );
 };
 

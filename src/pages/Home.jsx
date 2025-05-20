@@ -4,10 +4,12 @@ import Kids from '../components/Kids'
 import Women from '../components/Women'
 import Services from '../components/Services'
 import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
 
 const Home = () => {
   return (
     <>
+    {/* <Navbar/> */}
     <BannerGrid/>
     <Services/>
     <Men/>

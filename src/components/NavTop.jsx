@@ -4,7 +4,7 @@ import React from 'react'
 
 const NavTop = () => {
   return (
-   <Grid container spacing={0} sx={{background:'black'}}>
+   <Grid container mt={2} spacing={0} sx={{background:'black'}}>
    {/* <Grid container spacing={0} sx={{background:'#cad4d9'}}> */}
       <Grid size={3} sx={{textAlign:'center',textDecoration:'none', color:'white'}}  variant="h6"
             component={Link}
